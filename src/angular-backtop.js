@@ -3,6 +3,10 @@ var backtop = angular.module('backtop', []);
 backtop.directive('backTop', [function() {
   return {
     restrict: 'A',
+    scope: {
+      text: "@buttonText",
+      speed: "@scrollSpeed"
+    },
     link: function(scope, element) {
 
       function currentYPosition() {
@@ -34,8 +38,7 @@ backtop.directive('backTop', [function() {
           scrollTo(0, stopY);
           return;
         }
-        var speed = Math.round(distance / 100);
-        if (speed >= 20) speed = 20;
+        var speed = Math.round(scope.speed / 100);
         var step = Math.round(distance / 25);
         var leapY = stopY > startY ? startY + step : startY - step;
         var timer = 0;
@@ -56,10 +59,8 @@ backtop.directive('backTop', [function() {
         }
       }
 
-
-      element.append('<button id="back">Back</button');
+      element.append('<button id="back">'+scope.text+'</button');
       var button = document.getElementById('back');
-      // console.log(element);
 
       button.addEventListener('click', function(){
         smoothScroll();

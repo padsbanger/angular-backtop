@@ -1,0 +1,9 @@
+.container {
+  width: 768px;
+  margin: 0 auto;
+}
+
+p {
+  padding: 5px 0px;
+  line-height: 24px;
+}

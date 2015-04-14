@@ -21,7 +21,7 @@ module.exports = function(grunt) {
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       html: {
-        files: ['demo/index.html', 'src/*' ],
+        files: ['demo/index.html', 'src/*.css', 'src/*.js' ],
         options: {
           livereload: {
             port: 9000
