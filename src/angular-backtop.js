@@ -9,7 +9,9 @@ backtop.directive('backTop', [function() {
     },
     link: function(scope, element) {
 
-      function currentYPosition() {
+      var self = this;
+
+      self.currentYPosition = function() {
         if (self.pageYOffset)
           return self.pageYOffset;
         if (document.documentElement && document.documentElement.scrollTop)
@@ -17,21 +19,10 @@ backtop.directive('backTop', [function() {
         if (document.body.scrollTop)
           return document.body.scrollTop;
         return 0;
-      }
+      };
 
-      function elmYPosition(eID) {
-        var elm = document.getElementById(eID);
-        var y = elm.offsetTop;
-        var node = elm;
-        while (node.offsetParent && node.offsetParent != document.body) {
-          node = node.offsetParent;
-          y += node.offsetTop;
-        }
-        return y;
-      }
-
-      function smoothScroll(eID) {
-        var startY = currentYPosition();
+      self.smoothScroll = function(eID) {
+        var startY = self.currentYPosition();
         var stopY = 0;
         var distance = stopY > startY ? stopY - startY : startY - stopY;
         if (distance < 100) {
@@ -57,16 +48,17 @@ backtop.directive('backTop', [function() {
           if (leapY < stopY) leapY = stopY;
           timer++;
         }
-      }
+      };
 
       element.append('<button id="back">'+scope.text+'</button');
       var button = document.getElementById('back');
 
       button.addEventListener('click', function(){
-        smoothScroll();
+        self.smoothScroll();
         button.classList.remove('show');
       });
-      window.onscroll = function(ev) {
+
+      window.addEventListener('scroll', function() {
         console.log(document.body.offsetHeight);
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
           button.classList.add('show');
@@ -75,7 +67,7 @@ backtop.directive('backTop', [function() {
           button.classList.remove('show');
           console.log('hiding');
         }
-      };
+      });
     }
   };
 

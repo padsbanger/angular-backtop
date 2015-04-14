@@ -2,11 +2,29 @@
   padding: 5px;
   opacity: 0;
   transition: opacity .3s ease-out;
+  bottom: 30px;
+  right: 30px;
+  position: fixed;
 }
 
 .show {
   opacity: 1 !important;
-  bottom: 30px;
-  right: 30px;
-  position: fixed;
+}
+
+
+/*TODO: THEMES*/
+.theme-light {
+
+}
+
+.theme-dark {
+
+}
+
+.theme-full-width {
+
+}
+
+.theme-bootstrap {
+
 }
