@@ -31,3 +31,4 @@ lib/
 .bower-cache/
 .bower-registry/
 .bower-tmp/
+test-coverage/

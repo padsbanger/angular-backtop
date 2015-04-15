@@ -1,4 +1,4 @@
-var backtop = angular.module('backtop', []);
+var backtop = angular.module('angular.backtop', []);
 
 backtop.directive('backTop', [function() {
   return {
@@ -51,20 +51,20 @@ backtop.directive('backTop', [function() {
       };
 
       element.append('<button id="back">'+scope.text+'</button');
-      var button = document.getElementById('back');
+      self.button = document.getElementById('back');
 
-      button.addEventListener('click', function(){
+      self.button.addEventListener('click', function(){
         self.smoothScroll();
-        button.classList.remove('show');
+        self.button.classList.remove('show');
       });
 
       window.addEventListener('scroll', function() {
         console.log(document.body.offsetHeight);
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-          button.classList.add('show');
+          self.button.classList.add('show');
           console.log('showing');
         } else{
-          button.classList.remove('show');
+          self.button.classList.remove('show');
           console.log('hiding');
         }
       });

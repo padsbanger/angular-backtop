@@ -10,7 +10,6 @@ module.exports = function(grunt) {
   grunt.initConfig({
     bower: {
       install: {
-        targetDir: 'libs',
         verbose: true,
         cleanup: true
       }
@@ -21,7 +20,25 @@ module.exports = function(grunt) {
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       html: {
-        files: ['demo/index.html', 'src/*.css', 'src/*.js' ],
+        files: ['demo/index.html'],
+        options: {
+          livereload: {
+            port: 9000
+          }
+        },
+      },
+      js: {
+        files: ['src/js/angular-backtop.js'],
+        tasks: ['copy', 'uglify'],
+        options: {
+          livereload: {
+            port: 9000
+          }
+        },
+      },
+      less: {
+        files: ['src/less/**/*.less'],
+        tasks: ['less'],
         options: {
           livereload: {
             port: 9000
@@ -43,12 +60,32 @@ module.exports = function(grunt) {
       }
     },
 
-    uglify: {
-      build: {
+    less: {
+      development: {
+        options: {
+          compress: true,
+          paths: ['src/less/*/']
+        },
         files: {
-          'js/build/app.min.js': 'js/build/app.min.js',
-          'js/build/libs.min.js': 'js/build/libs.js'
+          'dist/angular-backtop.css': 'src/less/main.less',
         }
+      }
+    },
+
+    uglify: {
+      js: {
+        files: {
+          'dist/angular-backtop.min.js': 'dist/angular-backtop.js'
+        }
+      }
+    },
+
+    copy: {
+      js: {
+        files: [{
+          src: 'src/js/angular-backtop.js',
+          dest: 'dist/angular-backtop.js'
+        }]
       }
     },
 
@@ -64,8 +101,10 @@ module.exports = function(grunt) {
 
     // Test settings
     karma: {
-      configFile: 'karma.conf.js',
-      singleRun: true
+      unit: {
+        configFile: 'karma.conf.js',
+        singleRun: true
+      }
     },
 
   });
@@ -74,7 +113,9 @@ module.exports = function(grunt) {
     grunt.task.run([
       'clean',
       'bower:install',
-      'uglify:build',
+      'copy',
+      'uglify',
+      'less',
       'karma:unit',
       'coveralls'
     ]);
@@ -84,6 +125,9 @@ module.exports = function(grunt) {
     grunt.task.run([
       'clean',
       'bower:install',
+      'copy',
+      'uglify',
+      'less',
       'connect:server',
       'watch'
     ]);
