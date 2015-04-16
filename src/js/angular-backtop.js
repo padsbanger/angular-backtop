@@ -5,7 +5,8 @@ backtop.directive('backTop', [function() {
     restrict: 'A',
     scope: {
       text: "@buttonText",
-      speed: "@scrollSpeed"
+      speed: "@scrollSpeed",
+      theme: "@buttonTheme"
     },
     link: function(scope, element) {
 
@@ -50,10 +51,10 @@ backtop.directive('backTop', [function() {
         }
       };
 
-      element.append('<button id="back">'+scope.text+'</button');
-      self.button = document.getElementById('back');
+      element.append('<div id="backtop" class="' + scope.theme + '"><button>' + scope.text + '</button></div');
+      self.button = document.getElementById('backtop');
 
-      self.button.addEventListener('click', function(){
+      self.button.addEventListener('click', function() {
         self.smoothScroll();
         self.button.classList.remove('show');
       });
@@ -63,7 +64,7 @@ backtop.directive('backTop', [function() {
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
           self.button.classList.add('show');
           console.log('showing');
-        } else{
+        } else {
           self.button.classList.remove('show');
           console.log('hiding');
         }
