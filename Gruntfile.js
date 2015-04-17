@@ -10,8 +10,11 @@ module.exports = function(grunt) {
   grunt.initConfig({
     bower: {
       install: {
+        targetDir: 'libs',
         verbose: true,
+        cleanBowerDir: true,
         cleanup: true
+
       }
     },
 

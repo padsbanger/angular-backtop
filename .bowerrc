@@ -1,5 +1,5 @@
 {
-    "directory": "libs/",
+    "directory": "libs",
     "json": "bower.json",
     "storage" : {
       "packages" : ".bower-cache",
