@@ -2,7 +2,10 @@ var backtop = angular.module('angular.backtop', []);
 
 backtop.directive('backTop', [function() {
   return {
-    restrict: 'A',
+    restrict: 'E',
+    transclude: true,
+    replace: true,
+    template: '<div id="backtop" class="{{theme}}"><button>{{text}}</button></div>',
     scope: {
       text: "@buttonText",
       speed: "@scrollSpeed",
@@ -22,7 +25,7 @@ backtop.directive('backTop', [function() {
         return 0;
       };
 
-      self.smoothScroll = function(eID) {
+      self.smoothScroll = function() {
         var startY = self.currentYPosition();
         var stopY = 0;
         var distance = stopY > startY ? stopY - startY : startY - stopY;
@@ -51,21 +54,20 @@ backtop.directive('backTop', [function() {
         }
       };
 
-      element.append('<div id="backtop" class="' + scope.theme + '"><button>' + scope.text + '</button></div');
-      self.button = document.getElementById('backtop');
+      self.button = element.find('button');
 
-      self.button.addEventListener('click', function() {
+      self.button.on('click', function() {
         self.smoothScroll();
-        self.button.classList.remove('show');
+        element.removeClass('show');
       });
 
       window.addEventListener('scroll', function() {
         console.log(document.body.offsetHeight);
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-          self.button.classList.add('show');
+          element.addClass('show');
           console.log('showing');
         } else {
-          self.button.classList.remove('show');
+          element.removeClass('show');
           console.log('hiding');
         }
       });
