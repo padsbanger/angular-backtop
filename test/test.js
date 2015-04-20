@@ -1,7 +1,7 @@
 'use strict';
 
 describe('backtop directive', function () {
-  var scope, element2
+  var scope, element;
 
   beforeEach(module('angular.backtop'));
 
@@ -9,17 +9,13 @@ describe('backtop directive', function () {
 
     scope = $rootScope.$new();
 
-    element2 = $compile('<div back-top scroll-speed=300 button-text="Take me back"></div>')(scope);
+    element = $compile('<back-top scroll-speed=600 button-theme="light" button-text="Take me back"></back-top>')(scope);
 
     scope.$digest();
   }));
 
-  it('should contain field name', function() {
-    // var innerHTML = element[0].innerHTML;
-
-    console.log(element2);
-
-    // expect(innerHTML.length > 0).toBe(true);
+  it('should contain a compiled button', function() {
+    expect(element[0].innerHTML).toContain('button');
   });
 
 });

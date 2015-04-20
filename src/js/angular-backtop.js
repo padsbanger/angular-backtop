@@ -15,7 +15,7 @@ backtop.directive('backTop', [function() {
 
       var self = this;
 
-      self.currentYPosition = function() {
+      scope.currentYPosition = function() {
         if (self.pageYOffset)
           return self.pageYOffset;
         if (document.documentElement && document.documentElement.scrollTop)
@@ -25,8 +25,8 @@ backtop.directive('backTop', [function() {
         return 0;
       };
 
-      self.smoothScroll = function() {
-        var startY = self.currentYPosition();
+      scope.smoothScroll = function() {
+        var startY = scope.currentYPosition();
         var stopY = 0;
         var distance = stopY > startY ? stopY - startY : startY - stopY;
         if (distance < 100) {
@@ -54,10 +54,10 @@ backtop.directive('backTop', [function() {
         }
       };
 
-      self.button = element.find('button');
+      scope.button = element.find('button');
 
-      self.button.on('click', function() {
-        self.smoothScroll();
+      scope.button.on('click', function() {
+        scope.smoothScroll();
         element.removeClass('show');
       });
 
