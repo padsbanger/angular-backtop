@@ -1,4 +1,4 @@
-#angular-backtop
+#angular-backtop [![Build Status](https://travis-ci.org/padsbanger/angular-backtop.svg)](https://travis-ci.org/padsbanger/angular-backtop)
 
 A simple *Angular.js* directive to create "Back to top" button when user reaches the end of the page.
 
