@@ -13,6 +13,10 @@ backtop.directive('backTop', [function() {
     },
     link: function(scope, element) {
 
+      scope.text = scope.text || 'Scroll top';
+      scope.speed = parseInt(scope.speed, 10) || 300;
+      scope.theme = scope.theme || 'light';
+
       var self = this;
 
       scope.currentYPosition = function() {
@@ -62,13 +66,10 @@ backtop.directive('backTop', [function() {
       });
 
       window.addEventListener('scroll', function() {
-        console.log(document.body.offsetHeight);
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
           element.addClass('show');
-          console.log('showing');
         } else {
           element.removeClass('show');
-          console.log('hiding');
         }
       });
     }
