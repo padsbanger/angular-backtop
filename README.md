@@ -20,7 +20,7 @@ Create directive element somewhere inside of your *<body>* tag:
 <back-top></back-top>
 ```
 
-... and thats all, you have a basic button, that will appear when you reach the end of the page. Click on it to be redirected to the top.
+... and thats all, you have a basic button, that will appear when you start scrolling the page. Click on it to be redirected to the top.
 
 ## Options
 
