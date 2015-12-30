@@ -5,7 +5,7 @@ backtop.directive('backTop', [function() {
     restrict: 'E',
     transclude: true,
     replace: true,
-    template: '<div id="backtop" class="{{theme}}"><button>{{text}}</button></div>',
+    template: '<div id="backtop" class="{{theme}}"><button><div ng-transclude></div>{{text}}</button></div>',
     scope: {
       text: "@buttonText",
       speed: "@scrollSpeed",
