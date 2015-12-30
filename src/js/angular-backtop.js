@@ -66,7 +66,7 @@ backtop.directive('backTop', [function() {
       });
 
       window.addEventListener('scroll', function() {
-        if (window.scrollY > 0) {
+        if (window.pageYOffset > 0) {
           element.addClass('show');
         } else {
           element.removeClass('show');
