@@ -17,7 +17,7 @@ var app = angular.module('app', ['angular.backtop']);
 Create directive element somewhere inside of your *<body>* tag:
 
 ```html
-<back-top></back-top>
+<back-top>Scroll top</back-top>
 ```
 
 ... and thats all, you have a basic button, that will appear when you start scrolling the page. Click on it to be redirected to the top.
@@ -28,13 +28,12 @@ You can pass some more options to the directive.
 
   - **scroll-speed** - Speed in miliseconds, default value is 600
   - **button-theme** - Themes for button, there is *bootstrap*, *dark* & *light*. Default it *light*.
-  - **button-text** - Text, that will be displayed inside of a button. Default is *Scroll top*.
 
 
 Example:
 
 ```html
- <back-top scroll-speed=600 button-theme="light" button-text="Take me back"></back-top>
+ <back-top scroll-speed=600 button-theme="light">Take me back</back-top>
 ```
 
 ## Tests
