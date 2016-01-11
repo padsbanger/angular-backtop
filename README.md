@@ -8,6 +8,12 @@ You can see a working demo [here](http://padsbanger.github.io/angular-backtop/de
 
 Assuming that you already have Angular.js in your app, include *angular-backtop.js* and *angular-backtop.css*.
 
+You can also use Bower, just type:
+
+```js`
+bower install --save angular-backtop.
+```
+
 Add directive as your dependency:
 
 ```js
