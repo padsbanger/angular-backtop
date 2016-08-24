@@ -14,64 +14,64 @@ backtop.directive('backTop', [function() {
     link: function(scope, element) {
 
       scope.text = scope.text || 'Scroll top';
-      scope.speed = parseInt(scope.speed, 10) || 300;
       scope.theme = scope.theme || 'light';
+			scope.speed = parseInt(scope.speed, 10) || 300;
+			
+			var speed = Math.round(scope.speed / 100);
+			var onscroll = function() {
+				if (window.pageYOffset > 0) {
+					if(!element.showing){
+						element.addClass('show');
+						element.showing = true;
+					}
+				} else {
+					element.removeClass('show');
+					element.showing = false;
+				}
+			}
 
-      var self = this;
+			scope.currentYPosition = function() {
+				if (document.documentElement && document.documentElement.scrollTop)
+					return document.documentElement.scrollTop;
+				if (document.body.scrollTop)
+					return document.body.scrollTop;
+				return 0;
+			};
 
-      scope.currentYPosition = function() {
-        if (self.pageYOffset)
-          return self.pageYOffset;
-        if (document.documentElement && document.documentElement.scrollTop)
-          return document.documentElement.scrollTop;
-        if (document.body.scrollTop)
-          return document.body.scrollTop;
-        return 0;
-      };
+			element.showing = false;
+			element.on('click', function() {
+				window.removeEventListener("scroll", onscroll);
 
-      scope.smoothScroll = function() {
-        var startY = scope.currentYPosition();
-        var stopY = 0;
-        var distance = stopY > startY ? stopY - startY : startY - stopY;
-        if (distance < 100) {
-          scrollTo(0, stopY);
-          return;
-        }
-        var speed = Math.round(scope.speed / 100);
-        var step = Math.round(distance / 25);
-        var leapY = stopY > startY ? startY + step : startY - step;
-        var timer = 0;
-        if (stopY > startY) {
-          for (var i = startY; i < stopY; i += step) {
-            setTimeout("window.scrollTo(0, " + leapY + ")", timer * speed);
-            leapY += step;
-            if (leapY > stopY) leapY = stopY;
-            timer++;
-          }
-          return;
-        }
-        for (var j = startY; j > stopY; j -= step) {
-          setTimeout("window.scrollTo(0, " + leapY + ")", timer * speed);
-          leapY -= step;
-          if (leapY < stopY) leapY = stopY;
-          timer++;
-        }
-      };
+				element.removeClass('show');
+				element.showing = false;
 
-      scope.button = element.find('button');
+				var startY = scope.currentYPosition();
 
-      scope.button.on('click', function() {
-        scope.smoothScroll();
-        element.removeClass('show');
-      });
+				if (startY < 100) {
+					scrollTo(0, 0);
+					return;
+				}
 
-      window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 0) {
-          element.addClass('show');
-        } else {
-          element.removeClass('show');
-        }
-      });
+				var step = Math.round(startY / 25);
+				var leapY = startY - step;
+
+				var scrollInterval = setInterval(function(){
+					window.scrollTo(0, leapY)
+					if(!leapY){
+						clearInterval(scrollInterval);
+						window.addEventListener("scroll", onscroll)
+					}
+
+					leapY -= step;
+
+					if(leapY < 0) leapY = 0;
+				}, speed)
+			});
+
+			window.addEventListener("scroll", onscroll);
+			scope.$on("$destroy", function(){
+				window.removeEventListener("scroll", onscroll)
+			})
     }
   };
 
