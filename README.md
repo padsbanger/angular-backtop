@@ -11,7 +11,7 @@ Assuming that you already have Angular.js in your app, include *angular-backtop.
 You can also use Bower, just type:
 
 ```js`
-bower install --save angular-backtop.
+bower install --save angular-backtop
 ```
 
 Add directive as your dependency:
