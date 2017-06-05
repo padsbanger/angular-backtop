@@ -10,7 +10,7 @@ Assuming that you already have Angular.js in your app, include *angular-backtop.
 
 You can also use Bower, just type:
 
-```js`
+```js
 bower install --save angular-backtop.
 ```
 
