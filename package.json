@@ -18,7 +18,7 @@
     "type": "git",
     "url": "https://github.com/padsbanger/angular-backtop"
   },
-  "dependencies": {
+  "devDependencies": {
     "grunt-concurrent": "^1.0.0",
     "grunt-cli": "^0.1.13",
     "less": "^2.5.0",
