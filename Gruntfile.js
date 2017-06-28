@@ -118,8 +118,6 @@ module.exports = function(grunt) {
       'copy',
       'uglify',
       'less',
-      'karma:unit',
-      'coveralls'
     ]);
   });
 
